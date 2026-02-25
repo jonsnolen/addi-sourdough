@@ -30,8 +30,8 @@ git push -u origin main
 
 | Name | Value | Notes |
 |------|-------|-------|
-| `DATABASE_URL` | Your Supabase connection string | Supabase → Project Settings → Database → Connection string (URI) |
-| `DIRECT_DATABASE_URL` | Same as DATABASE_URL | Use the **Transaction** pooler mode URI. Replace `[YOUR-PASSWORD]` with your DB password. |
+| `DATABASE_URL` | Your Supabase connection string | Supabase → Project Settings → Database → Connection string → **URI** (Transaction mode). Must start with `postgresql://`. Replace `[YOUR-PASSWORD]` with your DB password. |
+| `DIRECT_DATABASE_URL` | Same as DATABASE_URL | Copy the same value. Both must be the standard `postgresql://...` format. |
 | `NEXTAUTH_SECRET` | Run `openssl rand -base64 32` | Generate a random string |
 | `NEXTAUTH_URL` | `https://your-app.vercel.app` | Update after first deploy with your actual URL |
 | `STRIPE_SECRET_KEY` | `sk_live_...` or `sk_test_...` | From Stripe Dashboard → Developers → API keys |

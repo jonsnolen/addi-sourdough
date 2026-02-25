@@ -4,18 +4,26 @@ import { PrismaPg } from "@prisma/adapter-pg";
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
 function createPrisma() {
-  // Use DIRECT_DATABASE_URL for adapter when using prisma+postgres (local dev)
-  const connectionString =
-    process.env.DIRECT_DATABASE_URL || process.env.DATABASE_URL;
+  // Prefer direct Postgres URL; Vercel Postgres uses POSTGRES_URL for direct connection
+  const connectionString = (
+    process.env.DIRECT_DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.DATABASE_URL ||
+    ""
+  )
+    .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+    .trim();
   if (!connectionString) {
     throw new Error("DATABASE_URL or DIRECT_DATABASE_URL is not set");
   }
-  if (
-    !connectionString.startsWith("postgres://") &&
-    !connectionString.startsWith("postgresql://")
-  ) {
+  const isPostgres =
+    connectionString.toLowerCase().startsWith("postgres://") ||
+    connectionString.toLowerCase().startsWith("postgresql://");
+  if (!isPostgres) {
     throw new Error(
-      "DATABASE_URL must be a standard postgres:// URL for the app. Use DIRECT_DATABASE_URL when using prisma+postgres."
+      "DATABASE_URL must start with postgresql://. " +
+        "In Supabase: Project Settings → Database → Connection string → URI (Transaction mode). " +
+        "Replace [YOUR-PASSWORD] with your database password."
     );
   }
   const adapter = new PrismaPg({ connectionString });
