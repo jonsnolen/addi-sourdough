@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: addi-sourdough
+    runtime: node
+    rootDir: web
+
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm start
+
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_DATABASE_URL
+        sync: false
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: CRON_SECRET
+        generateValue: true
