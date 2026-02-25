@@ -2,15 +2,25 @@
 
 ## 1. Push to GitHub
 
-Create a new repository on [github.com/new](https://github.com/new) named `addi-sourdough` (or similar), then run:
+A browser window should have opened to create a new repo. If not, go to [github.com/new](https://github.com/new).
+
+1. Name it `addi-sourdough` (or leave as-is)
+2. Leave "Add a README" **unchecked** (we already have code)
+3. Click **Create repository**
+
+Then run:
 
 ```bash
 cd "/Users/jon/Projects/Addi Website"
+./push-to-github.sh
+```
+
+Or manually (replace YOUR_USERNAME with your GitHub username):
+
+```bash
 git remote add origin https://github.com/YOUR_USERNAME/addi-sourdough.git
 git push -u origin main
 ```
-
-Replace `YOUR_USERNAME` with your GitHub username.
 
 ## 2. Deploy to Vercel
 
@@ -20,8 +30,8 @@ Replace `YOUR_USERNAME` with your GitHub username.
 
 | Name | Value | Notes |
 |------|-------|-------|
-| `DATABASE_URL` | Your Supabase connection string | From Supabase → Settings → Database |
-| `DIRECT_DATABASE_URL` | Same as DATABASE_URL | Use the "Connection pooling" URI for Supabase |
+| `DATABASE_URL` | Your Supabase connection string | Supabase → Project Settings → Database → Connection string (URI) |
+| `DIRECT_DATABASE_URL` | Same as DATABASE_URL | Use the **Transaction** pooler mode URI. Replace `[YOUR-PASSWORD]` with your DB password. |
 | `NEXTAUTH_SECRET` | Run `openssl rand -base64 32` | Generate a random string |
 | `NEXTAUTH_URL` | `https://your-app.vercel.app` | Update after first deploy with your actual URL |
 | `STRIPE_SECRET_KEY` | `sk_live_...` or `sk_test_...` | From Stripe Dashboard → Developers → API keys |
