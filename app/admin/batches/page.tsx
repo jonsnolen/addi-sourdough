@@ -2,6 +2,8 @@ import { BatchForm } from "@/components/admin/BatchForm";
 import { BatchesList } from "@/components/admin/BatchesList";
 import { prisma } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminBatchesPage() {
   const products = await prisma.product.findMany({
     where: { isActive: true },

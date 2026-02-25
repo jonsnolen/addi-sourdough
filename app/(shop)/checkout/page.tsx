@@ -1,4 +1,6 @@
 import { getCurrentUser } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 import { redirect } from "next/navigation";
 import { CheckoutForm } from "@/components/shop/CheckoutForm";
 

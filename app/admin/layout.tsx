@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAdmin } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 
 export default async function AdminLayout({

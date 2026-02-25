@@ -65,3 +65,17 @@ In Vercel → Settings → Environment Variables, set `NEXTAUTH_URL` to your liv
 ## Admin Login
 
 After seeding: **admin@addi.local** / **admin123** — change this in production!
+
+---
+
+## Troubleshooting: "DATABASE_URL must be a standard postgres:// URL"
+
+Your connection string must start with `postgresql://` (or `postgres://`). 
+
+**Supabase:** Project Settings → Database → Connection string → choose **URI** and **Transaction** mode. It should look like:
+```
+postgresql://postgres.xxxxx:YOUR_PASSWORD@aws-0-us-east-1.pooler.supabase.com:6543/postgres
+```
+Replace `YOUR_PASSWORD` with your actual database password (no brackets).
+
+**In Vercel:** Paste this exact string into both `DATABASE_URL` and `DIRECT_DATABASE_URL`. No extra spaces or quotes.

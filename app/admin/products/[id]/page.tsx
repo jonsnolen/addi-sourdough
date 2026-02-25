@@ -1,4 +1,6 @@
 import { prisma } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import { ProductForm } from "@/components/admin/ProductForm";
 
